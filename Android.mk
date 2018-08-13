@@ -6,6 +6,8 @@ common_cflags := \
     -DEXTERNAL_CODECS \
     -DBREAK_HANDLER \
     -DUNICODE -D_UNICODE -DUNIX_USE_WIN_FILE \
+    -Wno-reorder -Wno-sign-compare -Wno-error \
+    -Wno-delete-non-virtual-dtor \
     -Wno-non-virtual-dtor \
 	-Wno-c++11-narrowing
 
