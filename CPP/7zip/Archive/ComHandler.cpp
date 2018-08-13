@@ -580,8 +580,8 @@ HRESULT CDatabase::Open(IInStream *inStream)
     UString msiName = ConvertName(item.Name, isMsiName);
     if (isMsiName)
     {
-      if (msiName.Len() >= 4 && StringsAreEqualNoCase_Ascii(msiName.RightPtr(4), ".cab")
-          || msiName.Len() >= 3 && msiName[0] != k_Msi_SpecChar && StringsAreEqualNoCase_Ascii(msiName.RightPtr(3), "exe"))
+      if ((msiName.Len() >= 4 && StringsAreEqualNoCase_Ascii(msiName.RightPtr(4), ".cab"))
+          || (msiName.Len() >= 3 && msiName[0] != k_Msi_SpecChar && StringsAreEqualNoCase_Ascii(msiName.RightPtr(3), "exe")))
       {
         numCabs++;
         MainSubfile = i;

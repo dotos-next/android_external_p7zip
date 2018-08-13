@@ -23,6 +23,7 @@
 
 using namespace NWindows;
 using namespace NTime;
+using namespace NArchive::NChm;
 
 namespace NArchive {
 namespace NChm {
@@ -143,29 +144,30 @@ STDMETHODIMP CHandler::GetProperty(UInt32 index, PROPID propID, PROPVARIANT *val
     case kpidIsDir:  prop = item.IsDir(); break;
     case kpidSize:  prop = item.Size; break;
     case kpidMethod:
-    {
-      if (!item.IsDir())
-        if (item.Section == 0)
+      if (!item.IsDir()) {
+        if (item.Section == 0) {
           prop = "Copy";
-        else if (item.Section < m_Database.Sections.Size())
+        } else if (item.Section < m_Database.Sections.Size()) {
           prop = m_Database.Sections[(unsigned)item.Section].GetMethodName();
+        }
+      }
       break;
-    }
     case kpidBlock:
-      if (m_Database.LowLevel)
+      if (m_Database.LowLevel) {
         prop = item.Section;
-      else if (item.Section != 0)
+      } else if (item.Section != 0) {
         prop = m_Database.GetFolder(index);
+      }
       break;
-    
+
     #ifdef _CHM_DETAILS
-    
+
     case kpidSection:  prop = (UInt32)item.Section; break;
     case kpidOffset:  prop = (UInt32)item.Offset; break;
 
     #endif
   }
-  
+
   prop.Detach(value);
   return S_OK;
   COM_TRY_END
